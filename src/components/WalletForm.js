@@ -7,3 +7,4 @@ export default class WalletForm extends Component {
     );
   }
 }
+
