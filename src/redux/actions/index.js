@@ -24,6 +24,11 @@ export const saveData = (payload) => ({
   payload,
 });
 
+export const removeGlobalState = (remove) => ({
+  type: 'REMOVE_STATE',
+  remove,
+});
+
 export function fetchAPIThunk() {
   return async (dispatch) => {
     try {

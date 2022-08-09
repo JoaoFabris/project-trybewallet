@@ -5,17 +5,23 @@ const INITIAL_STATE = {
   id: 0,
   editor: false,
 };
-const walletUser = (state = INITIAL_STATE, { type, payload }) => {
-  switch (type) {
+
+const walletUser = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
   case 'GET_CURRENCIES_ALL':
     return {
       ...state,
-      currencies: payload,
+      currencies: action.payload,
     };
   case 'SAVE_EXPENSE':
     return {
       ...state,
-      expenses: [...state.expenses, payload],
+      expenses: [...state.expenses, action.payload],
+    };
+  case 'REMOVE_STATE':
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.remove),
     };
   default:
     return state;

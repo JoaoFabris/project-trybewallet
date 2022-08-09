@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeGlobalState } from '../redux/actions';
 
 class Table extends Component {
+  handleDeleteClick = (expense) => {
+    const { clearStore } = this.props;
+    clearStore(expense);
+  }
+
   render() {
-    const { expenses = [''] } = this.props;
+    const { expenses } = this.props;
     return (
       <table>
         <thead>
@@ -32,6 +38,17 @@ class Table extends Component {
                 <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
                 <td>{(value * Number(exchangeRates[currency].ask)).toFixed(2)}</td>
                 <td>Real</td>
+                <td>
+                  <button
+                    data-testid="delete-btn"
+                    id={ id }
+                    onClick={ () => this.handleDeleteClick(id) }
+                    type="button"
+                  >
+                    Excluir
+
+                  </button>
+                </td>
               </tr>
             </tbody>))}
       </table>
@@ -41,8 +58,12 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.any),
+  clearStore: PropTypes.func,
 }.isRequired;
 const mapStateToProps = (state) => ({
   ...state.wallet,
 });
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  clearStore: (clear) => dispatch(removeGlobalState(clear)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
