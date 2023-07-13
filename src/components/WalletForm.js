@@ -120,7 +120,7 @@ class WalletForm extends React.Component {
             </select>
           </label>
         </form>
-        <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
+        <button type="button" onClick={ this.handleClick }>Adicionar Despesas</button>
       </>
     );
   }

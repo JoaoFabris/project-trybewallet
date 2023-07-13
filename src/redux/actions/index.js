@@ -29,6 +29,15 @@ export const removeGlobalState = (remove) => ({
   remove,
 });
 
+export const dltExpense = (payload) => ({
+  type: 'DLT_EXPENSE', payload });
+
+export const editExpense = (payload) => ({
+  type: 'EDIT_EXPENSE', payload });
+
+export const modifyExpense = (payload) => ({
+  type: 'MODIFY_EXPENSE', payload });
+
 export function fetchAPIThunk() {
   return async (dispatch) => {
     try {

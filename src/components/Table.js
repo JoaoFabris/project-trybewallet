@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeGlobalState } from '../redux/actions';
+import { removeGlobalState, dltExpense, editExpense } from '../redux/actions';
 
 class Table extends Component {
   handleDeleteClick = (expense) => {
     const { clearStore } = this.props;
     clearStore(expense);
   }
+
+  const handleEdit = ({ target }) => {
+    const payload = { idToEdit: target.id, editor: true };
+    dispatch(editExpense(payload));
+  };
 
   render() {
     const { expenses } = this.props;
